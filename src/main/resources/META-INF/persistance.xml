@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+  <persistence-unit name="default">
+
+    <class>databaseObjects.SdActiontypesEntity</class>
+    <class>databaseObjects.SdDesignsEntity</class>
+    <class>databaseObjects.SdKeywordsEntity</class>
+    <class>databaseObjects.SdLinksEntity</class>
+    <class>databaseObjects.SdOwnersEntity</class>
+    <class>databaseObjects.SdProblemkeywordsEntity</class>
+    <class>databaseObjects.SdProblemlinksEntity</class>
+    <class>databaseObjects.SdProblemsEntity</class>
+    <class>databaseObjects.SdSolutionsEntity</class>
+    <class>databaseObjects.SdSolutionslogEntity</class>
+    <class>databaseObjects.SysdiagramsEntity</class>
+    <properties>
+      <property name="hibernate.connection.url"
+                value="jdbc:sqlserver://192.168.39.199:1433;databaseName=solutiondesigns"/>
+      <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+    </properties>
+  </persistence-unit>
+</persistence>
