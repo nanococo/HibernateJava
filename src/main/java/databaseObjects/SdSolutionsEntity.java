@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Objects;
 
+//Esta clase define la estructura en Java para la tabla sd_solutions
 @Entity
 @Table(name = "sd_solutions", schema = "dbo", catalog = "solutiondesigns")
 public class SdSolutionsEntity {
@@ -14,8 +15,6 @@ public class SdSolutionsEntity {
     private Timestamp posttime;
     private boolean active;
     private long solutionid;
-    private SdProblemsEntity sdProblemsByProblemid;
-    private SdDesignsEntity sdDesignsByDesignid;
     private Collection<SdSolutionslogEntity> sdSolutionslogsBySolutionid;
 
     @Basic
@@ -68,7 +67,9 @@ public class SdSolutionsEntity {
         this.active = active;
     }
 
+    //Este id define la primary key de la tabla
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "solutionid")
     public long getSolutionid() {
         return solutionid;
@@ -91,32 +92,28 @@ public class SdSolutionsEntity {
         return Objects.hash(problemid, designid, comments, posttime, active, solutionid);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "problemid", referencedColumnName = "problemid", nullable = false)
-    public SdProblemsEntity getSdProblemsByProblemid() {
-        return sdProblemsByProblemid;
-    }
-
-    public void setSdProblemsByProblemid(SdProblemsEntity sdProblemsByProblemid) {
-        this.sdProblemsByProblemid = sdProblemsByProblemid;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "designid", referencedColumnName = "designid", nullable = false)
-    public SdDesignsEntity getSdDesignsByDesignid() {
-        return sdDesignsByDesignid;
-    }
-
-    public void setSdDesignsByDesignid(SdDesignsEntity sdDesignsByDesignid) {
-        this.sdDesignsByDesignid = sdDesignsByDesignid;
-    }
-
-    @OneToMany(mappedBy = "sdSolutionsBySolutionid")
+    //Aquí es donde se define la relacón 1-N por medio de las anotaciones de Java. Se genera una relación
+    //con el atributo de sdSolutionsBySolutionid que se encuentra en la clase SdSolutionslogEntity
+    @OneToMany(mappedBy = "sdSolutionsBySolutionid", cascade = CascadeType.ALL)
     public Collection<SdSolutionslogEntity> getSdSolutionslogsBySolutionid() {
         return sdSolutionslogsBySolutionid;
     }
 
     public void setSdSolutionslogsBySolutionid(Collection<SdSolutionslogEntity> sdSolutionslogsBySolutionid) {
         this.sdSolutionslogsBySolutionid = sdSolutionslogsBySolutionid;
+    }
+
+    //To string para imprimir los elementos
+    @Override
+    public String toString() {
+        return "SdSolutionsEntity{" +
+                "problemid=" + problemid +
+                ", designid=" + designid +
+                ", comments='" + comments + '\'' +
+                ", posttime=" + posttime +
+                ", active=" + active +
+                ", solutionid=" + solutionid +
+                ", sdSolutionslogsBySolutionid=" + sdSolutionslogsBySolutionid +
+                '}';
     }
 }

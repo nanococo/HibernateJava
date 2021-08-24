@@ -28,7 +28,26 @@
             <version>9.4.0.jre8</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-c3p0 -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>6.0.0.Alpha9</version>
+        </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <mainClass>problems.oneToMany.OneToMany</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="HibernateJava">
+
+        <class>databaseObjects.SdActiontypesEntity</class>
+        <class>databaseObjects.SdDesignsEntity</class>
+        <class>databaseObjects.SdKeywordsEntity</class>
+        <class>databaseObjects.SdLinksEntity</class>
+        <class>databaseObjects.SdOwnersEntity</class>
+        <class>databaseObjects.SdProblemkeywordsEntity</class>
+        <class>databaseObjects.SdProblemlinksEntity</class>
+        <class>databaseObjects.SdProblemsEntity</class>
+        <class>databaseObjects.SdSolutionsEntity</class>
+        <class>databaseObjects.SdSolutionslogEntity</class>
+        <class>databaseObjects.SysdiagramsEntity</class>
+        <properties>
+            <property name="hibernate.connection.url"
+                      value="jdbc:sqlserver://192.168.39.199:1433;databaseName=solutiondesigns"/>
+            <property name="hibernate.connection.driver_class" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="hibernate.connection.user" value="waifuBot"/>
+            <property name="hibernate.connection.password" value="pass1234"/>
+            <!-- Configuring Connection Pool -->
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="500"/>
+            <property name="hibernate.c3p0.max_statements" value="50"/>
+            <property name="hibernate.c3p0.idle_test_period" value="2000"/>
+        </properties>
+    </persistence-unit>
+</persistence>

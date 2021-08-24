@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+//Esta clase define la estructura en Java para la tabla sd_solutionslog
 @Entity
 @Table(name = "sd_solutionslog", schema = "dbo", catalog = "solutiondesigns")
 public class SdSolutionslogEntity {
@@ -11,10 +12,10 @@ public class SdSolutionslogEntity {
     private Timestamp posttime;
     private Short actiontypeid;
     private Long solutionid;
-    private SdActiontypesEntity sdActiontypesByActiontypeid;
     private SdSolutionsEntity sdSolutionsBySolutionid;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "solutionlogid")
     public long getSolutionlogid() {
         return solutionlogid;
@@ -44,16 +45,6 @@ public class SdSolutionslogEntity {
         this.actiontypeid = actiontypeid;
     }
 
-    @Basic
-    @Column(name = "solutionid")
-    public Long getSolutionid() {
-        return solutionid;
-    }
-
-    public void setSolutionid(Long solutionid) {
-        this.solutionid = solutionid;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -67,17 +58,8 @@ public class SdSolutionslogEntity {
         return Objects.hash(solutionlogid, posttime, actiontypeid, solutionid);
     }
 
-    @ManyToOne
-    @JoinColumn(name = "actiontypeid", referencedColumnName = "actiontypeid")
-    public SdActiontypesEntity getSdActiontypesByActiontypeid() {
-        return sdActiontypesByActiontypeid;
-    }
-
-    public void setSdActiontypesByActiontypeid(SdActiontypesEntity sdActiontypesByActiontypeid) {
-        this.sdActiontypesByActiontypeid = sdActiontypesByActiontypeid;
-    }
-
-    @ManyToOne
+    //Aquí se define la otra dirección de la relación. Una relación de tipo N-1
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "solutionid", referencedColumnName = "solutionid")
     public SdSolutionsEntity getSdSolutionsBySolutionid() {
         return sdSolutionsBySolutionid;
@@ -85,5 +67,11 @@ public class SdSolutionslogEntity {
 
     public void setSdSolutionsBySolutionid(SdSolutionsEntity sdSolutionsBySolutionid) {
         this.sdSolutionsBySolutionid = sdSolutionsBySolutionid;
+    }
+
+    //El to string solo devuelve el solution id por motivos de prueba
+    @Override
+    public String toString() {
+        return String.valueOf(solutionlogid);
     }
 }
